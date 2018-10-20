@@ -1,0 +1,10 @@
+Flask==1.0.2
+Flask-RESTful==0.3.6
+Flask-SQLAlchemy==2.3.2
+psycopg2-binary
+Flask-JWT-Extended==3.12.1
+gunicorn==19.9.0
+Pillow==5.2.0
+youtube_dl==2018.9.18
+apscheduler==3.5.3
+requests
