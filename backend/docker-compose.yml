@@ -39,4 +39,3 @@ services:
       - data
     expose:
       - "5432"
-
