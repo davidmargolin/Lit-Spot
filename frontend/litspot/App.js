@@ -2,12 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import HelpScreen from './screens/HelpScreen';
+import TestScreen from './screens/TestScreen';
 import { createBottomTabNavigator } from 'react-navigation';
 
 const MainNavigator = createBottomTabNavigator(
   {
     home: { screen: HomeScreen },
-    help: { screen: HelpScreen }
+    help: { screen: TestScreen }
   },
   {
     navigationOptions: {
