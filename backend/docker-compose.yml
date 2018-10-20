@@ -1,0 +1,41 @@
+version: '2'
+
+services:
+  api:
+    restart: always
+    build: ./api
+    expose:
+      - "8001"
+    # volumes:
+    #   - /home/flask/app/api/rest_api/static
+    command: /usr/local/bin/gunicorn -w 2 -b :8001 rest_api:app
+    depends_on:
+      - postgres
+
+  nginx:
+    restart: always
+    build: ./nginx
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - /www/static
+    volumes_from:
+      - api
+
+    depends_on:
+      - api
+
+  data:
+    image: postgres:10.5
+    volumes:
+      - /var/lib/postgresql
+    command: "true"
+
+  postgres:
+    restart: always
+    build: ./postgresql
+    volumes_from:
+      - data
+    expose:
+      - "5432"
