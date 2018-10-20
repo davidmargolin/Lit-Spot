@@ -1,17 +1,152 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Linking,
+  TouchableHighlight
+} from 'react-native';
+import Header from '../common/Header';
+import { Feather } from '@expo/vector-icons';
 
 export default class HelpScreen extends React.Component {
   render() {
     return (
       <View>
-        <Text>HelpScreen</Text>
-        <Text>HelpScreen</Text>
-        <Text>HelpScreen</Text>
-        <Text onPress={() => this.props.navigation.navigate('home')}>
-          Go bback to home
-        </Text>
+        <Header />
+        <ScrollView>
+          <View style={styles.cardStyle}>
+            <TouchableHighlight
+              onPress={() => Linking.openURL('tel:9175191977')}
+            >
+              <View style={styles.sectionStyle}>
+                <View style={styles.thumbnailContainerStyle}>
+                  <Text
+                    style={{ fontSize: 17 }}
+                    onPress={() => console.log('onpressed')}
+                  >
+                    Emergency 911:
+                  </Text>
+                </View>
+                <View style={{ paddingLeft: 168 }}>
+                  <Feather
+                    style={{ paddingTop: 5 }}
+                    name="phone-call"
+                    size={30}
+                    color="#70aa31"
+                  />
+                </View>
+              </View>
+            </TouchableHighlight>
+          </View>
+          {/* ------------------------------*/}
+          <View style={styles.cardStyle}>
+            <TouchableHighlight
+              onPress={() => Linking.openURL('tel:9175191977')}
+            >
+              <View style={styles.sectionStyle}>
+                <View style={styles.thumbnailContainerStyle}>
+                  <Text
+                    style={{ fontSize: 17 }}
+                    onPress={() => console.log('onpressed')}
+                  >
+                    Non-Emergency 311:
+                  </Text>
+                </View>
+                <View style={{ paddingLeft: 130 }}>
+                  <Feather
+                    style={{ paddingTop: 5 }}
+                    name="phone-call"
+                    size={30}
+                    color="#70aa31"
+                  />
+                </View>
+              </View>
+            </TouchableHighlight>
+          </View>
+          {/* ------------------------------*/}
+          <View style={styles.cardStyle}>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 19, padding: 10 }}>
+                When to evacuate:
+              </Text>
+            </View>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 15, padding: 10 }}>
+                Leave as soon as evacuation is recommended by fire officials to
+                avoid being caught in fire, smoke or road congestion. Don’t wait
+                to be ordered by authorities to leave.
+              </Text>
+            </View>
+          </View>
+
+          {/*====================*/}
+          <View style={styles.cardStyle}>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 19, padding: 10 }}>
+                Where to find shelters:
+              </Text>
+            </View>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 15, padding: 10 }}>
+                Litspot has a list of available shelters
+              </Text>
+            </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
 }
+
+const styles = {
+  cardStyle: {
+    borderWidth: 1,
+    borderRadius: 2,
+    borderColor: '#ddd',
+    borderBottomWidth: 0,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 10
+  },
+  sectionStyle: {
+    borderBottomWidth: 1,
+    padding: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderColor: '#ddd',
+    position: 'relative'
+  },
+
+  headerTextStyle: {
+    fontSize: 18
+  },
+  thumbnailStyle: {
+    height: 50,
+    width: 50
+  },
+  thumbnailContainerStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    marginRight: 10
+  },
+  imageStyle: {
+    height: 300,
+    flex: 1
+  },
+  sectionStyle1: {
+    padding: 5,
+    backgroundColor: '#fff',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    position: 'relative'
+  }
+};
