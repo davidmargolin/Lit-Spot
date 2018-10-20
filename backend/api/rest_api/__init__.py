@@ -1,12 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 from flask_restful import Api
-from flask_jwt_extended import JWTManager
 from flask_sqlalchemy import SQLAlchemy
 from os.path import abspath, dirname
 from apscheduler.schedulers.background import BackgroundScheduler
 import requests
 import csv
 import json
+# from rest_api.resources.litspot import fetchFires
 
 ###########################
 #### config flask app ####
@@ -15,7 +15,6 @@ app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.config['SECRET_KEY'] = 'myappsecretkey'
-
 
 scheduler = BackgroundScheduler()
 scheduler.start()
@@ -27,7 +26,7 @@ def fetchFires():
     headers = {'Authorization': 'Bearer 78978166-D47B-11E8-A432-CF089B439298'}
     filesListURL = "https://nrt4.modaps.eosdis.nasa.gov/api/v2/files/details/FIRMS/viirs/USA_contiguous_and_Hawaii?fields=all&format=json"
     files = requests.get(filesListURL, headers=headers)
-    newestFileURL = "https://nrt4.modaps.eosdis.nasa.gov" + files.json()["content"][0]["downloadsLink"]
+    newestFileURL = "https://nrt4.modaps.eosdis.nasa.gov" + files.json()["content"][-1]["downloadsLink"]
     newestFile = requests.get(newestFileURL, headers=headers)
     dict_list = []
     reader = csv.DictReader(newestFile.text.splitlines())
@@ -53,7 +52,7 @@ basedir = abspath(dirname(__file__))
 app.config['POSTGRES_USER'] = "shawn"
 app.config["POSTGRES_DEFAULT_USER"] = "postgres"
 app.config["POSTGRES_PASSWORD"] = "my_password"
-app.config["POSTGRES_DB"]="youcmt-db"
+app.config["POSTGRES_DB"]="litspot-db"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://'+ app.config['POSTGRES_USER']+":"+app.config["POSTGRES_PASSWORD"]+"@postgres:5432/"+app.config["POSTGRES_DB"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -62,12 +61,9 @@ db = SQLAlchemy(app)
 ########################
 #### config jwt ########
 #######################
-app.config["JWT_SECRET_KEY"] = "myjwtsecretkey"
-app.config["JWT_BLACKLIST_ENABLED"] =True
-app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = ["access", "refresh"]
-
-jwt = JWTManager(app)
-
+# app.config["JWT_SECRET_KEY"] = "myjwtsecretkey"
+# app.config["JWT_BLACKLIST_ENABLED"] =True
+# app.config["JWT_BLACKLIST_TOKEN_CHECKS"] = ["access", "refresh"]
 
 ###########################
 #### config api  ######

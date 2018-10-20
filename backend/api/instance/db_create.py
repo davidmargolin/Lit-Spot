@@ -1,6 +1,5 @@
 import sys
 import os
-from werkzeug.security import generate_password_hash
 from sqlalchemy.schema import DropTable
 from sqlalchemy.ext.compiler import compiles
 
@@ -22,7 +21,7 @@ def _compile_drop_table(element, compiler, **kwargs):
 db.drop_all()
 # from rest_api.models.video import VideoModel # noqa
 # from rest_api.models.user import UserModel # noqa
-# from rest_api.models.comment import CommentModel # noqa
+from rest_api.models.fire import FireModel # noqa
 db.create_all()
 
 #### init db with essential data ####
