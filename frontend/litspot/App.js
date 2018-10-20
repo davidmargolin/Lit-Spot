@@ -1,21 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import HomeScreen from './screens/HomeScreen';
+import HelpScreen from './screens/HelpScreen';
+import { createBottomTabNavigator } from 'react-navigation';
+
+const MainNavigator = createBottomTabNavigator(
+  {
+    home: { screen: HomeScreen },
+    help: { screen: HelpScreen }
+  },
+  {
+    navigationOptions: {
+      tabBarVisible: false
+    }
+  }
+);
 
 export default class App extends React.Component {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    return <MainNavigator />;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: '#fff'
+  }
 });
