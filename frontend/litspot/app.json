@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "litspot",
-    "description": "This project is really great.",
+    "name": "Lit Spot",
+    "description": "Protect People From The Dangers Of Wildfires",
     "slug": "litspot",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./images/icon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,8 +20,22 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+    "android": {
+      "package": "com.thisteamisonfire.litspot",
+      "config": {
+        "googleMaps":{
+          "apiKey": "AIzaSyC8le2bh_txQqaOiUBL3BHb-mm0yCG0URk"
+        }
+      },
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION",
+        "MANAGE_DOCUMENTS",
+        "READ_EXTERNAL_STORAGE",
+        "READ_INTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     }
   }
 }

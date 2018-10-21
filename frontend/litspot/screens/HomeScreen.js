@@ -1,31 +1,10 @@
-import React from 'react';
-import { MapView } from 'expo';
+import { Entypo, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Constants, Location, MapView, Notifications, Permissions } from 'expo';
 import firebase from 'firebase';
-import mapTheme from '../common/maptheme.js';
-import {
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Keyboard,
-  TouchableOpacity,
-  DatePickerIOS,
-  ScrollView,
-  Animated,
-  Easing,
-  Modal
-} from 'react-native';
-import { Constants } from 'expo';
-import PropTypes from 'prop-types';
-import {
-  MaterialCommunityIcons,
-  EvilIcons,
-  Ionicons,
-  Entypo,
-  FontAwesome
-} from '@expo/vector-icons';
-import TextInputField from '../common/TextInputField.js';
+import React from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
 import SnackBar from 'react-native-snackbar-component';
+import mapTheme from '../common/maptheme.js';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -72,16 +51,40 @@ export default class HomeScreen extends React.Component {
         this.setState({ confirmedFires: resultList });
       }
     });
+
+      this._getLocationAsync();
   }
 
-  handleSignUp = () => {};
+  _getLocationAsync = async () => {
+
+    let token = await Notifications.getExpoPushTokenAsync();
+    console.log(token)
+    firebase.database().ref('users').once('value').then((snapshot) =>{
+      let users = snapshot.val()
+      console.log(users)
+      users=users.filter(item => item.deviceid !== token)
+      users.push({
+        deviceid: token,
+        longitude: -73.976441,
+        latitude: 40.723354
+      })
+      firebase.database().ref('users').set(users)
+    })
+  
+  };
+
+  handleSignUp = () => { };
 
   reportFire = () => {
+    console.log(      'http://104.248.13.6/api/verify?latitude=' +
+    this.state.coords.latitude +
+    '&longitude=' +
+    this.state.coords.longitude)
     fetch(
       'http://104.248.13.6/api/verify?latitude=' +
-        this.state.coords.latitude +
-        '&longitude=' +
-        this.state.coords.longitude
+      this.state.coords.latitude +
+      '&longitude=' +
+      this.state.coords.longitude
     )
       .then(response => response.json())
       .then(lit => {
@@ -101,12 +104,12 @@ export default class HomeScreen extends React.Component {
   };
 
   getCircleColor = frp => {
-    if (frp > 6) {
-      return '#f4414166';
-    } else if (2 < frp && frp <= 6) {
-      return '#f4854166';
+    if (frp > 5) {
+      return '#f4414135';
+    } else if (2 < frp && frp <= 5) {
+      return '#f4854135';
     } else {
-      return '#f4d04166';
+      return '#f4d04135';
     }
   };
 
@@ -117,7 +120,7 @@ export default class HomeScreen extends React.Component {
       longitudeDelta: 0.5,
       latitudeDelta: 0.5
     };
-    Number.prototype.toRad = function() {
+    Number.prototype.toRad = function () {
       return (this * Math.PI) / 180;
     };
 
@@ -136,9 +139,9 @@ export default class HomeScreen extends React.Component {
       var a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1.toRad()) *
-          Math.cos(lat2.toRad()) *
-          Math.sin(dLon / 2) *
-          Math.sin(dLon / 2);
+        Math.cos(lat2.toRad()) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c;
 
@@ -215,8 +218,8 @@ export default class HomeScreen extends React.Component {
           <View
             style={{
               position: 'absolute',
-              width: '100%',
-
+              width: 300,
+              right: 0,
               flex: 1,
               alignItems: 'center',
 
@@ -225,47 +228,68 @@ export default class HomeScreen extends React.Component {
           >
             <View
               style={{
-                flex: 1,
-                margin: 20,
-                backgroundColor: '#2c2e33',
-                justifyContent: 'center',
-                alignItems: 'center',
-                padding: 20,
-                borderRadius: 20
+                width: 300,
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
               }}
             >
-              {this.state.item.acq_datetime === 'notreal' ? (
-                <Text style={{ fontSize: 16, color: 'white' }}>
-                  No Data Found
-                </Text>
-              ) : (
-                <View>
+              <View style={{
+                borderRadius: 20, padding: 12, borderRadius: 15,
+                borderWidth: 1, margin: 15, width: 300,
+                backgroundColor: '#2c2e33'
+              }}>
+                {this.state.item.acq_datetime === 'notreal' ? (
                   <Text style={{ fontSize: 16, color: 'white' }}>
-                    Date Scanned:{' '}
-                    {this.state.item.acq_datetime.slice(0, 4) +
-                      '-' +
-                      this.state.item.acq_datetime.slice(4, 6) +
-                      '-' +
-                      this.state.item.acq_datetime.slice(6, 8)}
-                  </Text>
-                  <Text style={{ padding: 4, fontSize: 16, color: 'white' }}>
-                    Time Scanned:{' '}
-                    {this.state.item.acq_datetime.slice(-4, -2) +
-                      ':' +
-                      this.state.item.acq_datetime.slice(-2)}
-                  </Text>
-                </View>
-              )}
+                    No Data Found
+                </Text>
+                ) : (
+                    <View>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Longitude: {this.state.coords.longitude}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Latitude: {this.state.coords.latitude}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        FRP: {this.state.item.frp}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Brightness: {this.state.item.bright_ti5}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Track: {this.state.item.scan}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Scan: {this.state.item.track}
+                      </Text>
+                      <Text style={{ fontSize: 16, color: 'white' }}>
+                        Date Scanned:{' '}
+                        {this.state.item.acq_datetime.slice(0, 4) +
+                          '-' +
+                          this.state.item.acq_datetime.slice(4, 6) +
+                          '-' +
+                          this.state.item.acq_datetime.slice(6, 8)}
+                      </Text>
+                      <Text style={{ paddingBottom: 4, fontSize: 16, color: 'white' }}>
+                        Time Scanned:{' '}
+                        {this.state.item.acq_datetime.slice(-4, -2) +
+                          ':' +
+                          this.state.item.acq_datetime.slice(-2)}
+                      </Text>
+                    </View>
+                  )}
+              </View>
               <TouchableOpacity
                 onPress={this.reportFire}
                 style={{
                   borderRadius: 15,
                   borderWidth: 1,
                   flexDirection: 'row',
+                  backgroundColor: '#2c2e33',
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: 8,
-                  margin: 10
+                  marginRight: 15
                 }}
               >
                 <Text
@@ -322,74 +346,10 @@ export default class HomeScreen extends React.Component {
               this.props.navigation.navigate('help');
             }}
           >
-            <Entypo name={'phone'} size={32} color="#7f8d89" />
+            <Entypo name={'phone'} size={32} color="#f44141" />
           </TouchableOpacity>
         </View>
 
-        <Modal
-          animationType="fade"
-          transparent={true}
-          visible={this.state.modalVisible}
-        >
-          <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
-            <View
-              style={{
-                backgroundColor: 'white',
-                borderRadius: 20,
-                padding: 20
-              }}
-            >
-              <ScrollView keyboardShouldPersistTaps="always">
-                <Text style={styles.loginHeader}> SafeHaven </Text>
-
-                <TextInputField
-                  innerOnChangeText={firstName => (this.firstName = firstName)}
-                  placeholderText="First name"
-                  inputIcon={'ios-person-outline'}
-                />
-
-                <TextInputField
-                  innerOnChangeText={lastName => (this.lastName = lastName)}
-                  placeholderText="Last name"
-                  inputIcon={'ios-person-outline'}
-                />
-
-                <TextInputField
-                  innerOnChangeText={address => (this.address = address)}
-                  placeholderText="Address"
-                  inputIcon={'address'}
-                />
-
-                <TextInputField
-                  innerOnChangeText={capacity => (this.capacity = capacity)}
-                  placeholderText="Capacity"
-                  inputIcon={'ios-people'}
-                />
-
-                <TextInputField
-                  innerOnChangeText={description =>
-                    (this.description = description)
-                  }
-                  placeholderText="Description"
-                  inputIcon={'text'}
-                  multiline={true}
-                  numberOfLines={4}
-                />
-                <TouchableOpacity
-                  icon={'home'}
-                  onPress={() => {
-                    this.setModalVisible(!this.state.modalVisible);
-                    console.log('firstname:' + this.firstName);
-                    console.log('clicked');
-                  }}
-                >
-                  <FontAwesome icon={'home'} />
-                  Submit
-                </TouchableOpacity>
-              </ScrollView>
-            </View>
-          </KeyboardAvoidingView>
-        </Modal>
         <SnackBar
           autoHidingTime={2000}
           visible={this.state.snackVisible}
