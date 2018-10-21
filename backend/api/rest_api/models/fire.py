@@ -47,20 +47,43 @@ class FireModel(db.Model):
         self.frp=frp
         self.daynight = daynight
 
-        # find a list of locations for the given position
-        @classmethod
-        def find_by_location(cls, latitude, longitude):
-            pass
+    # find a list of locations for the given position
+    @classmethod
+    def find_by_location(cls, latitude, longitude):
+        pass
 
-        @classmethod
-        def find_by_datetime(cls, datetime):
-            pass
+    @classmethod
+    def find_by_datetime(cls, datetime):
+        pass
 
-        def save_to_db (self):
-            db.session.add(self)
-            db.session.commit()
+    def json(self):
+        return {
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "bright_ti4": self.bright_ti4,
+            "scan":self.scan,
+            "track":self.track,
+            "acq_datetime":self.acq_datetime,
+            "satellite":self.satellite,
+            "confidence":self.confidence,
+            "version":self.version,
+            "bright_ti5":self.bright_ti5,
+            "frp":self.frp,
+            "daynight":self.daynight
+        }
 
-        def delete_from_db(self):
-            db.session.delete(self)
-            db.session.commit()
+    def save_to_db (self):
+        db.session.add(self)
+        db.session.commit()
 
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def delete_all(cls):
+        cls.query.delete()
+
+    @classmethod
+    def find_all(cls):
+        return cls.query.all()
