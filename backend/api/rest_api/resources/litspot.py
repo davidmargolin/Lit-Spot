@@ -96,6 +96,26 @@ class Verify(Resource):
             "is_lit": str(is_lit)
         }, 200
 
+class DrillNYC(Resource):
+    def get(self):
+        f = FireModel(
+        latitude= float(40.723655),
+        longitude= float(-73.976540),
+        bright_ti4 = float(700),
+        scan = float(0.47),
+        track = float(0.47),
+        acq_datetime = "201810211212",
+        satellite = "N",
+        confidence = "nominal",
+        version = "1.0NRT",
+        bright_ti5 = float(700),
+        frp= float(700),
+        daynight = "N"
+        )
+        f.save_to_db()
+        return {
+            "message":"Drill Sent"
+        },200
 
 class Shelters(Resource):
     def get(self):
