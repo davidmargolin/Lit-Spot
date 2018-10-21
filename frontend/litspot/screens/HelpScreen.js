@@ -78,7 +78,20 @@ export default class HelpScreen extends React.Component {
             </View>
             <View style={styles.sectionStyle1}>
               <Text style={{ fontSize: 15, padding: 10 }}>
-                Litspot has a list of available shelters
+                Visit https://www1.nyc.gov/nyc-resources/service/1856/homeless-shelter-intake
+              </Text>
+            </View>
+          </View>
+
+                    <View style={styles.cardStyle}>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 19, paddingHorizontal: 10, paddingTop: 10 }}>
+                What to do if you are displaced:
+              </Text>
+            </View>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 15, padding: 10 }}>
+                Call Emergency Housing Services at (212) 863-8561
               </Text>
             </View>
           </View>
