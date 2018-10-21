@@ -49,10 +49,10 @@ class Verify(Resource):
         filesListURL = "https://litspot-cd4d5.firebaseio.com/users.json"
         data = requests.get(filesListURL, headers=None).json()
         
-        lat_max = latitude + 10
-        lat_min = latitude - 10
-        lon_max = longitude + 10
-        lon_min = longitude - 10
+        lat_max = latitude + 3
+        lat_min = latitude - 3
+        lon_max = longitude + 3
+        lon_min = longitude - 3
         dev_list =[]
         # validate location
         if data:
@@ -93,7 +93,7 @@ class Verify(Resource):
             self.validate_notify(latitude=data['latitude'], longitude=data['longitude'])
 
         return {
-            "is_lit": str(is_lit)
+            "is_lit": is_lit
         }, 200
 
 class DrillNYC(Resource):
