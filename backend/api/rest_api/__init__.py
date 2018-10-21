@@ -108,7 +108,7 @@ def fetchDB():
             version = line['version'],
             bright_ti5 = float(line['bright_ti5']),
             frp= float(line['frp']),
-            daynight = line['daynight'],
+            daynight = line['daynight']
         )
         f.save_to_db()
 # from rest_api.resources.env import DateTime # noqa
@@ -121,9 +121,10 @@ def fetchDB():
 # from rest_api.resources.video import VideoInfo # noqa
 # api.add_resource(VideoInfo, "/api/video/info")
 
-from rest_api.resources.litspot import Fires, Verify# noqa
+from rest_api.resources.litspot import Fires, Verify, DrillNYC# noqa
 api.add_resource(Fires, "/api/fires")
 api.add_resource(Verify,"/api/verify")
+api.add_resource(DrillNYC, "/api/drillnyc")
 
 
 ####################################
