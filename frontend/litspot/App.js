@@ -3,17 +3,17 @@ import { StyleSheet, Text, View } from 'react-native';
 import firebase from 'firebase';
 import HomeScreen from './screens/HomeScreen';
 import HelpScreen from './screens/HelpScreen';
-import TestScreen from './screens/TestScreen';
-import { createBottomTabNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
-const MainNavigator = createBottomTabNavigator(
+const MainNavigator = createStackNavigator(
   {
     home: { screen: HomeScreen },
-    help: { screen: TestScreen }
+    help: { screen: HelpScreen }
   },
   {
+    headerMode: 'none',
     navigationOptions: {
-      tabBarVisible: false
+      headerVisible: false
     }
   }
 );
