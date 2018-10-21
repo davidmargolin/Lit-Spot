@@ -76,7 +76,11 @@ db = SQLAlchemy(app)
 api = Api(app)
 
 from rest_api.models.fire import FireModel # noqa
-@app.before_first_request
+
+scheduler = BackgroundScheduler()
+scheduler.start()
+
+# @app.before_first_request
 def fetchDB():
     FireModel.delete_all()
     headers = {'Authorization': 'Bearer 78978166-D47B-11E8-A432-CF089B439298'}
@@ -111,6 +115,8 @@ def fetchDB():
             daynight = line['daynight']
         )
         f.save_to_db()
+fetchDB()
+scheduler.add_job(fetchDB, 'interval', minutes=15)
 # from rest_api.resources.env import DateTime # noqa
 # api.add_resource(DateTime, "/api/datetime")
 
