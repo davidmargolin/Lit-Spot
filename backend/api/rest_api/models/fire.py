@@ -47,10 +47,7 @@ class FireModel(db.Model):
         self.frp=frp
         self.daynight = daynight
 
-    # find a list of locations for the given position
-    @classmethod
-    def find_by_location(cls, latitude, longitude):
-        pass
+
 
     @classmethod
     def find_by_datetime(cls, datetime):
@@ -87,3 +84,11 @@ class FireModel(db.Model):
     @classmethod
     def find_all(cls):
         return cls.query.all()
+    
+    # find a list of locations for the given position
+    @classmethod
+    def find_by_location(cls, latitude_min, latitude_max, longitude_min, longitude_max):
+        return cls.query.filter(
+            cls.latitude >= latitude_min, cls.latitude<=latitude_max,
+            cls.longitude>=longitude_min, cls.longitude<=longitude_max
+            ).first()

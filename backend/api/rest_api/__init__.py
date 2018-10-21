@@ -121,8 +121,9 @@ def fetchDB():
 # from rest_api.resources.video import VideoInfo # noqa
 # api.add_resource(VideoInfo, "/api/video/info")
 
-from rest_api.resources.litspot import Fires# noqa
+from rest_api.resources.litspot import Fires, Verify# noqa
 api.add_resource(Fires, "/api/fires")
+api.add_resource(Verify,"/api/verify")
 
 
 ####################################
