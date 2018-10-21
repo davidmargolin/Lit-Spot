@@ -49,10 +49,10 @@ class Verify(Resource):
         filesListURL = "https://litspot-cd4d5.firebaseio.com/users.json"
         data = requests.get(filesListURL, headers=None).json()
         
-        lat_max = latitude + 3
-        lat_min = latitude - 3
-        lon_max = longitude + 3
-        lon_min = longitude - 3
+        lat_max = latitude + 1
+        lat_min = latitude - 1
+        lon_max = longitude + 1
+        lon_min = longitude - 1
         dev_list =[]
         # validate location
         if data:
@@ -74,11 +74,11 @@ class Verify(Resource):
 
     def get(self):
         data = self.parser.parse_args()
-        latitude_min = data['latitude']-2
-        latitude_max = data['latitude']+2
+        latitude_min = data['latitude']-1
+        latitude_max = data['latitude']+1
 
-        longitude_min =data['longitude']-2
-        longitude_max =data['longitude']+2
+        longitude_min =data['longitude']-1
+        longitude_max =data['longitude']+1
 
         location = FireModel.find_by_location(
             latitude_min=latitude_min,
