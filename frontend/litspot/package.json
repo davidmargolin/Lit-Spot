@@ -9,18 +9,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "email-validator": "^2.0.4",
     "expo": "^30.0.1",
-<<<<<<< HEAD
-    "moment": "^2.22.2",
-=======
     "firebase": "^5.5.5",
->>>>>>> 96649829335b45f3c4da4fc740df26798501533c
     "react": "16.3.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-native-communications": "^2.2.1",
     "react-native-elements": "^0.19.1",
     "react-native-phone-call": "^1.0.9",
+    "react-native-snackbar-component": "^1.1.0",
     "react-navigation": "^2.18.0"
   }
 }
