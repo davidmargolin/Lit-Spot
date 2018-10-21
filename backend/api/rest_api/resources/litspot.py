@@ -35,14 +35,14 @@ class Verify(Resource):
             longitude_min=longitude_min,
             longitude_max=longitude_max
             )
-        if location:
-            is_lit = location.bright_ti4>200
-            return {
-                "is_lit": str(is_lit)
-            }, 200
+        is_lit =False
+        if location and location.bright_ti4>200:
+            is_lit = True
+
         return {
-            "message":"non found"
-        },404
+            "is_lit": str(is_lit)
+        }, 200
+
 
 class Shelters(Resource):
     def get(self):
