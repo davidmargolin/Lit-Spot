@@ -8,3 +8,6 @@ Pillow==5.2.0
 youtube_dl==2018.9.18
 apscheduler==3.5.3
 requests
+exponent_server_sdk
+rollbar
+celery
