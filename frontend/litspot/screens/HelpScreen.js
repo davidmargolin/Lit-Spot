@@ -1,14 +1,7 @@
-import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Linking,
-  TouchableHighlight
-} from 'react-native';
-import Header from '../common/Header';
 import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { Linking, ScrollView, Text, TouchableHighlight, View } from 'react-native';
+import Header from '../common/Header';
 
 export default class HelpScreen extends React.Component {
   render() {
@@ -18,13 +11,12 @@ export default class HelpScreen extends React.Component {
         <ScrollView>
           <View style={styles.cardStyle}>
             <TouchableHighlight
-              onPress={() => Linking.openURL('tel:9175191977')}
+              onPress={() => Linking.openURL('tel:911')}
             >
               <View style={styles.sectionStyle}>
                 <View style={styles.thumbnailContainerStyle}>
                   <Text
                     style={{ fontSize: 17 }}
-                    onPress={() => console.log('onpressed')}
                   >
                     Emergency 911:
                   </Text>
@@ -40,16 +32,14 @@ export default class HelpScreen extends React.Component {
               </View>
             </TouchableHighlight>
           </View>
-          {/* ------------------------------*/}
           <View style={styles.cardStyle}>
             <TouchableHighlight
-              onPress={() => Linking.openURL('tel:9175191977')}
+              onPress={() => Linking.openURL('tel:311')}
             >
               <View style={styles.sectionStyle}>
                 <View style={styles.thumbnailContainerStyle}>
                   <Text
                     style={{ fontSize: 17 }}
-                    onPress={() => console.log('onpressed')}
                   >
                     Non-Emergency 311:
                   </Text>
@@ -65,10 +55,9 @@ export default class HelpScreen extends React.Component {
               </View>
             </TouchableHighlight>
           </View>
-          {/* ------------------------------*/}
           <View style={styles.cardStyle}>
             <View style={styles.sectionStyle1}>
-              <Text style={{ fontSize: 19, padding: 10 }}>
+              <Text style={{ fontSize: 19, paddingHorizontal: 10, paddingTop: 10 }}>
                 When to evacuate:
               </Text>
             </View>
@@ -81,16 +70,28 @@ export default class HelpScreen extends React.Component {
             </View>
           </View>
 
-          {/*====================*/}
           <View style={styles.cardStyle}>
             <View style={styles.sectionStyle1}>
-              <Text style={{ fontSize: 19, padding: 10 }}>
+              <Text style={{ fontSize: 19, paddingHorizontal: 10, paddingTop: 10 }}>
                 Where to find shelters:
               </Text>
             </View>
             <View style={styles.sectionStyle1}>
               <Text style={{ fontSize: 15, padding: 10 }}>
-                Litspot has a list of available shelters
+                Visit https://www1.nyc.gov/nyc-resources/service/1856/homeless-shelter-intake
+              </Text>
+            </View>
+          </View>
+
+                    <View style={styles.cardStyle}>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 19, paddingHorizontal: 10, paddingTop: 10 }}>
+                What to do if you are displaced:
+              </Text>
+            </View>
+            <View style={styles.sectionStyle1}>
+              <Text style={{ fontSize: 15, padding: 10 }}>
+                Call Emergency Housing Services at (212) 863-8561
               </Text>
             </View>
           </View>
