@@ -24,4 +24,4 @@ We built a mobile app solution using React Native, Flask, Firebase and Postgresq
 - save last known locations so users can receive notifications of fires in and around their area
 
 #### Moving Forward:
-In addition to wildfire visualization and reporting, we want to include a Safe Haven overlay to help those who need it find shelter. Finally, traffic data is incredibly important when escaping a wildfire. (We have this feature available on Android devices.)
+In addition to wildfire visualization and reporting, we want to include a Safe Haven overlay to help those who need to find shelter, and to train our voice assistant to respond better to the needs of the users. Finally, traffic data is incredibly important when escaping a wildfire. (We have this feature available on Android devices.)
