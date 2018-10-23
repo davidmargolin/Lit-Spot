@@ -1,7 +1,21 @@
 # Lit-Spot 
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/35040222/47387491-7d1d7880-d6dd-11e8-8d43-5ffd92e9634e.png" width="206" height="144">
+</p>
+
 ### A mobile app that detects early wildfires and reduces loss
+<p align="center">
 <img src="https://images-2018.spaceappschallenge.org/team-photos/o8w6ZAk1ZH95SnxIJaQ_T44a-vg=/10830/width-800/">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/35040222/47387449-637c3100-d6dd-11e8-9e56-d5af20be0732.jpg" width="800" height="450">
+</p>
+
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/35040222/47387466-73941080-d6dd-11e8-82fa-9d3c535637aa.png" width= "288" height="512">
+</p>
 
 #### Background:
 
